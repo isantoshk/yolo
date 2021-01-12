@@ -11,6 +11,7 @@
 #define in_h 608
 #define out_w 19
 #define out_w 19
+#define beta_nms 0.6
 
 struct detection;
 typedef struct detection detection;

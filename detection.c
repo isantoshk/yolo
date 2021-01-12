@@ -185,7 +185,12 @@ detection get_network_boxes(float* tensors, float thresh, float hier, int *map, 
 void postprocess(float* tensors, int cells, float thresh, float hier_thresh,  int* map, int relative, int* num, int letter)
 {
 	int nboxes = 0;
+	int nms = 0;
 	//detection *get_network_boxes(network *net, int w, int h, float thresh, float hier, int *map, int relative, int *num, int letter)
 	detection *dets = get_network_boxes(tensors, cells, thresh, hier_thresh, 0, 1, &nboxes, letter_box);
+	if (nms) {
+            if (l.nms_kind == DEFAULT_NMS) do_nms_sort(dets, nboxes, l.classes, nms);
+            else diounms_sort(dets, nboxes, l.classes, nms, l.nms_kind, l.beta_nms);
+        }
 
 }
